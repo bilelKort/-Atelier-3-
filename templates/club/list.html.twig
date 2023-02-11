@@ -1,0 +1,54 @@
+<ul>
+{% for item in formations %}   
+  <li>{{ item.Titre|upper }}</li>
+{% endfor %}
+</ul>
+<hr/>
+{% set i = 0 %}
+
+{% for item in formations %}   
+  {% set i = i + 1 %}
+{% endfor %}
+
+<p>
+{{"nombre des formations: "}} {{ i }}
+</p>
+<hr/>
+
+{% for item in formations %}   
+  {% if item.Description == 'formation theorique' %}
+    {{item.Titre}}
+  {% endif %}
+{% endfor %}
+
+<hr/>
+{% set list = [] %}
+{% for item in formations %}
+            {% set list = list|merge([item.nb_participants]) %}
+        {% endfor %}
+        {% for item in formations %}
+            {% if item.nb_participants == max(list) %}
+                <h4>{{ item.Titre }}</h4>
+        {% endif %}
+{% endfor %}
+<hr/>
+
+{% set totalParticipant = 0 %}
+{% for item in formations %}
+ {% set totalParticipant = totalParticipant + item.nb_participants %}
+{% endfor %} 
+<p>{{"Nombre Totale des participants: "}} {{totalParticipant}}</p>
+
+<hr/>
+{% set list = [] %}
+{% for item in list %}   
+  <li>{{ item }}</li>
+  {% else %} le tableau n’est pas défini et/ou vide."
+{% endfor %}
+<hr/>
+{% for item in formations %}   
+  {% if item.nb_participants == 0 %}
+    {{item.Titre}} <button> <a href="{{ path ('get_name', {'name' : item.Titre})}}" > participer</a> </button>
+  {% endif %}
+{% endfor %}
+
